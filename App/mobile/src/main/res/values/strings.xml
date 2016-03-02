@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Represent</string>
+    <string name="app_description">Find your federal representatives</string>
+    <string name="current_location">Use Current Location</string>
+    <string name="or">or</string>
+    <string name="zip">ZIP Code</string>
+    <string name="search">search</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+</resources>

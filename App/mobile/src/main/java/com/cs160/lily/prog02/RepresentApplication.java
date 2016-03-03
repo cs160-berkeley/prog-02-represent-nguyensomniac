@@ -17,5 +17,6 @@ public class RepresentApplication extends Application {
                         .setFontAttrId(R.attr.fontPath)
                         .build()
         );
+        getApplicationContext().setTheme(R.style.AppTheme);
     }
 }

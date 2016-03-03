@@ -7,20 +7,24 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:scaleType="centerCrop"
-        android:paddingRight="16dp"
+        android:layout_marginRight="16dp"
         app:civ_border_width="2dp"
         android:id="@+id/politician_photo"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        style="@style/cardBorders">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            style="@style/cardInsides">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/politician_name"/>
+                android:id="@+id/politician_name"
+                style="@style/heading3"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -28,17 +32,39 @@
                 <ImageView
                     android:layout_width="8dp"
                     android:layout_height="8dp"
+                    android:background="@drawable/party_symbol"
+                    android:layout_gravity="center_vertical"
                     android:id="@+id/politician_party_symbol"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/politician_party"/>
+                    android:id="@+id/politician_party"
+                    style="@style/heading4"/>
             </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </LinearLayout>
+        <android.support.v4.app.FragmentTabHost
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/politician_tab"
+            style="@style/cardInsides">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TabWidget
+                    android:id="@+id/politician_tab_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_gravity="top" />
+                <FrameLayout
+                    android:id="@+id/politician_tab_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/politician_tab_label"/>
+            </RelativeLayout>
+        </android.support.v4.app.FragmentTabHost>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/politician_detail_btn"/>
     </LinearLayout>
 </LinearLayout>

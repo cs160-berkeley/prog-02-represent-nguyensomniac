@@ -3,7 +3,7 @@
     package="com.cs160.lily.prog02">
 
     <application
-        android:name="com.cs160.lily.prog02.RepresentApplication"
+        android:name=".RepresentApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -28,7 +28,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".ResultsActivity"></activity>
+        <activity android:name=".ResultsActivity" />
+        <activity android:name=".DetailActivity"></activity>
     </application>
 
 </manifest>

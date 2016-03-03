@@ -5,11 +5,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/district_name"
-        style="@style/heading2"/>
-    <LinearLayout
+        android:id="@+id/politician_tweet"/>
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/representatives_wrapper"
-        android:orientation="vertical"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/politician_twitter"/>
 </LinearLayout>

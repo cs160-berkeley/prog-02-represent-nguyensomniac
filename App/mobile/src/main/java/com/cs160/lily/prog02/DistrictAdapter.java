@@ -26,7 +26,7 @@ public class DistrictAdapter extends ArrayAdapter<District> {
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent)   {
-        LayoutInflater inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View districtView = inflater.inflate(layoutId, parent, false);
         if (districtView != null) {
             District d = values[position];
@@ -36,7 +36,7 @@ public class DistrictAdapter extends ArrayAdapter<District> {
             wrapper.removeAllViews();
             RepAdapter r = new RepAdapter(context, R.layout.representative, d.getRepresentatives());
             for (int i = 0; i < r.getCount(); i++)  {
-                wrapper.addView(r.getView(i, null, wrapper));
+                wrapper.addView(r.getView(i, convertView, wrapper));
             }
         }
         return districtView;

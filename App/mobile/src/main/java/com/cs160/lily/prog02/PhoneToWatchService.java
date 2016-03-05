@@ -46,9 +46,10 @@ public class PhoneToWatchService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         // Which cat do we want to feed? Grab this info from INTENT
         // which was passed over when we called startService
+        if (intent == null) {return START_STICKY;}
         Bundle extras = intent.getExtras();
-        final String catName = extras.getString("CAT_NAME");
-
+        final String path = extras.getString("path");
+        final String data = extras.getString("data");
         // Send the message with the cat name
         new Thread(new Runnable() {
             @Override
@@ -56,7 +57,7 @@ public class PhoneToWatchService extends Service {
                 //first, connect to the apiclient
                 mApiClient.connect();
                 //now that you're connected, send a massage with the cat name
-                sendMessage("/" + catName, catName);
+                sendMessage("/" + path, data);
             }
         }).start();
 
@@ -71,6 +72,7 @@ public class PhoneToWatchService extends Service {
     private void sendMessage( final String path, final String text ) {
         //one way to send message: start a new thread and call .await()
         //see watchtophoneservice for another way to send a message
+        final Service _this = this;
         new Thread( new Runnable() {
             @Override
             public void run() {
@@ -83,6 +85,7 @@ public class PhoneToWatchService extends Service {
                     //4 arguments: api client, the node ID, the path (for the listener to parse),
                     //and the message itself (you need to convert it to bytes.)
                 }
+                _this.stopSelf();
             }
         }).start();
     }

@@ -3,15 +3,28 @@ package com.cs160.lily.prog02;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Message;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.lily.proj02_shared.County;
 import com.example.lily.proj02_shared.District;
+import com.example.lily.proj02_shared.ImageDownloader;
+import com.example.lily.proj02_shared.MessageContainer;
 import com.example.lily.proj02_shared.Politician;
 import com.example.lily.proj02_shared.State;
 import com.example.lily.proj02_shared.TestData;
+
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -28,27 +41,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-
-//        mFredButton = (Button) findViewById(R.id.fred_btn);
-//        mLexyButton = (Button) findViewById(R.id.lexy_btn);
-//
-//        mFredButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent sendIntent = new Intent(getBaseContext(), PhoneToWatchService.class);
-//                sendIntent.putExtra("CAT_NAME", "Fred");
-//                startService(sendIntent);
-//            }
-//        });
-//
-//        mLexyButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent sendIntent = new Intent(getBaseContext(), PhoneToWatchService.class);
-//                sendIntent.putExtra("CAT_NAME", "Lexy");
-//                startService(sendIntent);
-//            }
-//        });
 
     }
 
@@ -84,25 +76,37 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, ResultsActivity.class);
         District locationDistrict;
         Politician representative = TestData.createTestPolitician(1);
-        Politician sen1 = TestData.createTestPolitician(3);
-        Politician sen2 = TestData.createTestPolitician(2);
+        Politician sen1 = TestData.createTestPolitician(2);
+        Politician sen2 = TestData.createTestPolitician(3);
         Politician[] representatives = {sen1, sen2, representative};
-        locationDistrict = new District(State.CA, 20, representatives);
+        County[] counties = {new County("Fresno County", 53, 47), new County("Alameda County", 80, 20)};
+        locationDistrict = new District(State.CA, 20, representatives, counties);
         District[] district = {locationDistrict};
         intent.putExtra("DISTRICTS", district);
         startActivity(intent);
+        MessageContainer messageContainer = new MessageContainer(district, this);
+        sendToWatch(messageContainer);
     }
 
-    public void searchZip(View view)    {
+    public void searchZip(View view) {
         Intent intent = new Intent(this, ResultsActivity.class);
         District locationDistrict;
         Politician representative = TestData.createTestPolitician(1);
         Politician sen1 = TestData.createTestPolitician(3);
         Politician sen2 = TestData.createTestPolitician(4);
         Politician[] representatives = {sen1, sen2, representative};
-        locationDistrict = new District(State.CA, 3, representatives);
+        County[] counties = {new County("Fresno County", 53, 47), new County("Alameda County", 80, 20)};
+        locationDistrict = new District(State.CA, 3, representatives, counties);
         District[] district = {locationDistrict};
         intent.putExtra("DISTRICTS", district);
         startActivity(intent);
+        MessageContainer messageContainer = new MessageContainer(district, this);
+        sendToWatch(messageContainer);
+    }
+
+    /* Sends a message container (a district array and an array of drawable photos) to the watch. */
+    private void sendToWatch(MessageContainer m)    {
+        Intent sendIntent = new Intent(getBaseContext(), PhoneToWatchService.class);
+        MessageContainer.sendMessage(m, this, sendIntent);
     }
 }

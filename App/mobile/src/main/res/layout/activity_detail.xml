@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                style="@style/cardInsides">
+                style="@style/detailContainer">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -30,7 +30,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/detail_name"/>
+                        android:id="@+id/detail_name"
+                        style="@style/heading3"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -49,6 +50,36 @@
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
+                        android:layout_height="12dp"
+                        android:orientation="horizontal"
+                        android:clipChildren="false"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:weightSum="1">
+                        <LinearLayout
+                            android:id="@+id/detail_start_path"
+                            android:layout_height="4dp"
+                            android:layout_width="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            android:background="@drawable/dark_hr"/>
+                        <LinearLayout
+                            android:id="@+id/detail_end_path"
+                            android:layout_height="4dp"
+                            android:layout_width="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            android:clipChildren="false"
+                            android:background="@drawable/light_hr">
+                            <LinearLayout
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:layout_marginLeft="-6dp"
+                                android:background="@drawable/timeline_circle" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:weightSum="1">
                         <LinearLayout
@@ -61,11 +92,13 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Elected"/>
+                                android:text="Elected"
+                                style="@style/heading5"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/detail_start_date"/>
+                                android:id="@+id/detail_start_date"
+                                style="@style/heading6"/>
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="0dp"
@@ -77,30 +110,75 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Term ends"/>
+                                android:text="Term ends"
+                                style="@style/heading5"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/detail_end_date"/>
+                                android:id="@+id/detail_end_date"
+                                style="@style/heading6"/>
                         </LinearLayout>
                     </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        style="@style/lightHr" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Committees"/>
+                        android:text="Committees"
+                        android:paddingBottom="8dp"
+                        style="@style/heading3"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/detail_committees"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        style="@style/lightHr" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Bills Sponsored"/>
+                        android:text="Bills Sponsored"
+                        android:paddingBottom="8dp"
+                        style="@style/heading3"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:id="@+id/detail_bills_container"/>
+                        android:background="@drawable/rounded_nopadding">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/cardInsides"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.7"
+                                android:paddingRight="8dp"
+                                android:singleLine="true"
+                                android:text="Name"
+                                style="@style/heading4"/>
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.3"
+                                android:text="Date"
+                                style="@style/heading4"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:id="@+id/detail_bills_container" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

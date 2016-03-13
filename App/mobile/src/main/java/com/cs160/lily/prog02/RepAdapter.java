@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.lily.proj02_shared.Politician;
+import com.example.lily.proj02_shared.Representative;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -46,6 +47,7 @@ public class RepAdapter extends ArrayAdapter<Politician> {
         if (politicianView != null) {
             final Politician p = values[position];
             TextView politicianName = (TextView)politicianView.findViewById(R.id.politician_name);
+            TextView politicianDistrict = (TextView)politicianView.findViewById(R.id.politician_district);
             GradientDrawable partyIcon = (GradientDrawable)politicianView.findViewById(R.id.politician_party_symbol).getBackground();
             CircleImageView politicianPhoto = (CircleImageView)politicianView.findViewById(R.id.politician_photo);
             TextView politicianParty = (TextView)politicianView.findViewById(R.id.politician_party);
@@ -54,6 +56,11 @@ public class RepAdapter extends ArrayAdapter<Politician> {
             politicianName.setText(p.getTitle() + " " + p.getName());
             politicianParty.setText(p.getAffiliation());
             politicianParty.setTextColor(ContextCompat.getColor(context, partyColor));
+            try {
+                politicianDistrict.setText("District " + ((Representative) p).getDistrictNum());
+            } catch (ClassCastException e)  {
+                politicianDistrict.setMaxHeight(0);
+            }
             partyIcon.setColor(ContextCompat.getColor(context, partyColor));
             FragmentTabHost politicianTabHost = (FragmentTabHost) politicianView.findViewById(R.id.politician_tab);
             Bundle contactData = new Bundle();

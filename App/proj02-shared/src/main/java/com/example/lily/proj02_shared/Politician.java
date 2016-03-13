@@ -32,6 +32,7 @@ public class Politician implements Serializable {
     public String getTitle()    {
         return title.toString();
     }
+    public State getState(){ return state; }
     public Party getParty(){ return party; }
     public String getWebsite () {
         return website;

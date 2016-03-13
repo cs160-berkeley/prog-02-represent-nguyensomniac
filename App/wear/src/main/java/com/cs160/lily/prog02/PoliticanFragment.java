@@ -33,8 +33,8 @@ public class PoliticanFragment extends Fragment {
         p = (Politician)bundle.getSerializable("politician");
         byte[] d = (byte[])bundle.getByteArray("image");
         View pView =  inflater.inflate(R.layout.politician_view, container, false);
-        Button selectBtn = (Button)pView.findViewById(R.id.politician_switch);
-        selectBtn.setOnClickListener(new View.OnClickListener() {
+        LinearLayout politicianImage = (LinearLayout)pView.findViewById(R.id.politician_image);
+        politicianImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent switchIntent = new Intent(getActivity().getBaseContext(), WatchToPhoneService.class);
@@ -54,7 +54,6 @@ public class PoliticanFragment extends Fragment {
         });
         int partyColor = getResources().getIdentifier(
                 p.getParty().toString(), "color", getActivity().getApplicationContext().getPackageName());
-        LinearLayout politicianImage = (LinearLayout)pView.findViewById(R.id.politician_image);
         TextView politicianName = (TextView)pView.findViewById(R.id.politician_name);
         GradientDrawable partyIcon =
                 (GradientDrawable)pView.findViewById(R.id.politician_party_symbol).getBackground();
@@ -68,14 +67,6 @@ public class PoliticanFragment extends Fragment {
         politicianParty.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), partyColor));
         partyIcon.setColor(ContextCompat.getColor(getActivity().getApplicationContext(), partyColor));
         return pView;
-    }
-
-    public void onClick(View v) {
-
-    }
-
-    private void changeRepresentative() {
-
     }
 
 }

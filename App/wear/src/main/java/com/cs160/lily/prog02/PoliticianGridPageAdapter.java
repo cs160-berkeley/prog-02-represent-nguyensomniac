@@ -26,8 +26,8 @@ import java.util.List;
 public class PoliticianGridPageAdapter extends FragmentGridPagerAdapter {
     private final Context context;
     private List rows;
-    private District[] d;
-    private byte[][][] img;
+    private District d;
+    private byte[][] img;
     public PoliticianGridPageAdapter(Context context, FragmentManager fm, MessageContainer m)   {
         super(fm);
         this.context = context;
@@ -43,13 +43,9 @@ public class PoliticianGridPageAdapter extends FragmentGridPagerAdapter {
     @Override
     public int getColumnCount(int r) {
         if (r == 0) {
-            int total = 0;
-            for (int i = 0; i < d.length; i++)  {
-                total += d[i].getRepresentatives().length;
-            }
-            return total;
+            return d.getRepresentatives().length;
         } else if (r == 1)  {
-            return d[0].getCounties().length;
+            return d.getCounties().length;
         }
         return 0;
     }
@@ -57,26 +53,16 @@ public class PoliticianGridPageAdapter extends FragmentGridPagerAdapter {
     @Override
     public Fragment getFragment(int r, int c)   {
         if (r == 0) {
-            int total = 0;
-            int currentDistrict = 0;
-            while (total <= c && currentDistrict < d.length)   {
-                if (total + d[currentDistrict].getRepresentatives().length < c) {
-                    currentDistrict++;
-                    total += d[currentDistrict].getRepresentatives().length;
-                }
-                else {
-                    Politician currentPolitician = d[currentDistrict].getRepresentatives()[c - total];
-                    byte[] currentImage = img[currentDistrict][c - total];
-                    PoliticanFragment pf = new PoliticanFragment();
-                    Bundle politicianBundle = new Bundle();
-                    politicianBundle.putSerializable("politician", currentPolitician);
-                    politicianBundle.putByteArray("image", currentImage);
-                    pf.setArguments(politicianBundle);
-                    return pf;
-                }
-            }
+            Politician currentPolitician = d.getRepresentatives()[c];
+            byte[] currentImage = img[c];
+            PoliticanFragment pf = new PoliticanFragment();
+            Bundle politicianBundle = new Bundle();
+            politicianBundle.putSerializable("politician", currentPolitician);
+            politicianBundle.putByteArray("image", currentImage);
+            pf.setArguments(politicianBundle);
+            return pf;
         } else if (r == 1)  {
-            County currentCounty = d[0].getCounties()[c];
+            County currentCounty = d.getCounties()[c];
             CountyFragment cf = new CountyFragment();
             Bundle countyBundle = new Bundle();
             countyBundle.putSerializable("county", currentCounty);

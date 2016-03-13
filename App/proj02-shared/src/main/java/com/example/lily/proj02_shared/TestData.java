@@ -79,8 +79,8 @@ public class TestData {
                 endDate = 2016;
                 break;
         }
-        committees[0] = new Committee("Ethics", "Chair");
-        committees[1] = new Committee("Agriculture", "Member");
+        committees[0] = new Committee("Ethics", Committee.COMMITTEE);
+        committees[1] = new Committee("Agriculture", Committee.SUBCOMMITTEE);
         bills[0] = new Bill("PATRIOT Act", new Date());
         bills[1] = new Bill("Donald J. Drumpf Act to Make America Great Again", new Date());
         bills[2] = new Bill("Veterans' Bill of 2016", new Date());

@@ -5,7 +5,6 @@
     android:layout_gravity="bottom"
     android:gravity="bottom"
     android:id="@+id/politician_image" >
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -20,7 +19,8 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textColor="#50758E"
-            android:id="@+id/politician_name"/>
+            android:id="@+id/politician_name"
+            style="@style/header1"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,12 +34,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/politician_party"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Select"
-                android:id="@+id/politician_switch"/>
+                android:id="@+id/politician_party"
+                style="@style/header2"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

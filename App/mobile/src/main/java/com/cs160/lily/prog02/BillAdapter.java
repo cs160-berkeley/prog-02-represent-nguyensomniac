@@ -34,6 +34,13 @@ public class BillAdapter extends ArrayAdapter<Bill> {
             TextView billName = (TextView)billView.findViewById(R.id.bill_name);
             TextView billDate = (TextView)billView.findViewById(R.id.bill_date);
             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+            if (position % 2 == 0)   {
+                billView.setBackground(
+                        getContext().getResources().getDrawable(R.drawable.bill_odd, getContext().getTheme()));
+            } else {
+                billView.setBackground
+                        (getContext().getResources().getDrawable(R.drawable.bill_even, getContext().getTheme()));
+            }
             billName.setText(b.getTitle());
             billDate.setText(df.format(b.getDate()));
         }

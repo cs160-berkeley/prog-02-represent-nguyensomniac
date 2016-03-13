@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
         <ImageView
             android:layout_width="17dp"
             android:layout_height="17dp"
@@ -13,11 +17,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/politician_website"/>
+            android:id="@+id/politician_website"
+            android:paddingLeft="12dp"
+            android:autoLink="web"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
         <ImageView
             android:layout_width="17dp"
             android:layout_height="17dp"
@@ -25,6 +33,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/politician_email"/>
+            android:id="@+id/politician_email"
+            android:paddingLeft="12dp"
+            android:autoLink="email"/>
     </LinearLayout>
 </LinearLayout>

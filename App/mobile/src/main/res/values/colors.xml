@@ -2,6 +2,7 @@
 <resources>
     <color name="F4F8F9">#f4f8f9</color>
     <color name="accent_material_light">#63b1d0</color>
+    <color name="accent">#63b1d0</color>
     <color name="primary_material_light">#ffffff</color>
     <color name="primary_dark_material_light">#47575c</color>
     <color name="primary_text_default_material_light">#47575c</color>
@@ -9,6 +10,7 @@
     <color name="textColor">#47575c</color>
     <color name="textColorLight">#B1C9D5</color>
     <color name="textColorLighter">#CFE4EB</color>
+    <color name="textColorLightest">#F4F8F9</color>
     <color name="white">#ffffff</color>
     <color name="secondary">#F5647E</color>
     <color name="secondaryDark">#DC5B72</color>

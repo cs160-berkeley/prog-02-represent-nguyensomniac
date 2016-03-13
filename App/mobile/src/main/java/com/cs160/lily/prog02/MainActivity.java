@@ -7,20 +7,25 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import com.example.lily.proj02_shared.County;
 import com.example.lily.proj02_shared.District;
-import com.example.lily.proj02_shared.ImageDownloader;
 import com.example.lily.proj02_shared.MessageContainer;
 import com.example.lily.proj02_shared.Politician;
 import com.example.lily.proj02_shared.State;
 import com.example.lily.proj02_shared.TestData;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+import com.google.android.gms.location.LocationServices;
 
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -29,20 +34,44 @@ import java.io.ObjectOutputStream;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
-public class MainActivity extends Activity {
-    //there's not much interesting happening. when the buttons are pressed, they start
-    //the PhoneToWatchService with the cat name passed in.
-
-//    private Button mFredButton;
-//    private Button mLexyButton;
+public class MainActivity extends Activity implements GoogleApiClient.ConnectionCallbacks, OnConnectionFailedListener {
+    private GoogleApiClient mGoogleApiClient;
+    private Location location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
-
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mGoogleApiClient.disconnect();
+    }
+    /*  */
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        System.out.println(mGoogleApiClient);
+        location = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        System.out.println(location);
+    }
+    @Override
+    public void onConnectionSuspended(int cause) {}
+    @Override
+    public void onConnectionFailed(ConnectionResult result) {}
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -74,34 +103,30 @@ public class MainActivity extends Activity {
 
     public void findLocation(View view) {
         Intent intent = new Intent(this, ResultsActivity.class);
-        District locationDistrict;
-        Politician representative = TestData.createTestPolitician(1);
-        Politician sen1 = TestData.createTestPolitician(2);
-        Politician sen2 = TestData.createTestPolitician(3);
-        Politician[] representatives = {sen1, sen2, representative};
-        County[] counties = {new County("Fresno County", 53, 47), new County("Alameda County", 80, 20)};
-        locationDistrict = new District(State.CA, 20, representatives, counties);
-        District[] district = {locationDistrict};
-        intent.putExtra("DISTRICTS", district);
+        double lat = location.getLatitude();
+        double lon = location.getLongitude();
+        District d = District.resultsFromLatLon(lat, lon, intent, this);
+        if (d == null)  {return;}
+        intent.putExtra("DISTRICTS", d);
         startActivity(intent);
-        MessageContainer messageContainer = new MessageContainer(district, this);
+        MessageContainer messageContainer = new MessageContainer(d, this);
         sendToWatch(messageContainer);
     }
 
     public void searchZip(View view) {
-        Intent intent = new Intent(this, ResultsActivity.class);
-        District locationDistrict;
-        Politician representative = TestData.createTestPolitician(1);
-        Politician sen1 = TestData.createTestPolitician(3);
-        Politician sen2 = TestData.createTestPolitician(4);
-        Politician[] representatives = {sen1, sen2, representative};
-        County[] counties = {new County("Fresno County", 53, 47), new County("Alameda County", 80, 20)};
-        locationDistrict = new District(State.CA, 3, representatives, counties);
-        District[] district = {locationDistrict};
-        intent.putExtra("DISTRICTS", district);
-        startActivity(intent);
-        MessageContainer messageContainer = new MessageContainer(district, this);
-        sendToWatch(messageContainer);
+        EditText zipInput = (EditText)findViewById(R.id.main_zip);
+        String zip = zipInput.getText().toString();
+        if (zip.length() != 5)   {
+            return;
+        } else  {
+            Intent intent = new Intent(this, ResultsActivity.class);
+            District d = District.resultsFromZip(zip, intent, this);
+            if (d == null)  {return;}
+            intent.putExtra("DISTRICTS", d);
+            startActivity(intent);
+            MessageContainer messageContainer = new MessageContainer(d, this);
+            sendToWatch(messageContainer);
+        }
     }
 
     /* Sends a message container (a district array and an array of drawable photos) to the watch. */

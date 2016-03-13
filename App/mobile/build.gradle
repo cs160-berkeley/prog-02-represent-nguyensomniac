@@ -22,6 +22,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     wearApp project(':wear')
+    compile 'com.google.maps:google-maps-services:0.1.7'
     compile 'com.google.android.gms:play-services:8.1.0'
     compile 'com.google.android.gms:play-services-ads:8.1.0'
     compile 'com.google.android.gms:play-services-identity:8.1.0'
@@ -29,4 +30,6 @@ dependencies {
     compile project(':proj02-shared')
     compile 'uk.co.chrisjenx:calligraphy:2.1.0'
     compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'com.koushikdutta.ion:ion:2.+'
+    compile 'com.google.android.gms:play-services-base:7.0.0'
 }

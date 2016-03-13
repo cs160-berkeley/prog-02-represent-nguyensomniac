@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp">
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="64dp"
@@ -13,6 +14,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="0dp"
         android:orientation="vertical"
         style="@style/cardBorders">
         <LinearLayout
@@ -25,6 +27,10 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/politician_name"
                 style="@style/heading3"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/politician_district"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,6 +48,10 @@
                     style="@style/heading4"/>
             </LinearLayout>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            style="@style/lightHr" />
         <android.support.v4.app.FragmentTabHost
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

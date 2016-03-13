@@ -9,6 +9,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.wearable.view.DotsPageIndicator;
 import android.support.wearable.view.GridViewPager;
 import android.support.wearable.view.WatchViewStub;
 import android.util.Base64;
@@ -23,8 +24,14 @@ import com.example.lily.proj02_shared.Politician;
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class MainActivity extends Activity {
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +61,7 @@ public class MainActivity extends Activity {
         }
         final GridViewPager pager = (GridViewPager)findViewById(R.id.pager);
         pager.setAdapter(new PoliticianGridPageAdapter(this, getFragmentManager(), messageContainer));
+        pager.bringToFront();
     }
     private Intent sendIntent;
 

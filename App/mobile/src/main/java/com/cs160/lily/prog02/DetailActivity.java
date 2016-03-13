@@ -13,12 +13,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.lily.proj02_shared.Committee;
 import com.example.lily.proj02_shared.Politician;
 
 import org.w3c.dom.Text;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -55,14 +58,37 @@ public class DetailActivity extends AppCompatActivity {
         TextView endDate = (TextView)findViewById(R.id.detail_end_date);
         startDate.setText(Integer.toString(p.getStartDate()));
         endDate.setText(Integer.toString(p.getEndDate()));
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        float percentComplete = ((float)currentYear - p.getStartDate()) / ((float)p.getEndDate() - p.getStartDate());
+        System.out.println(percentComplete);
+        LinearLayout.LayoutParams timeStarted = (LinearLayout.LayoutParams)findViewById(R.id.detail_start_path).getLayoutParams();
+        timeStarted.weight = percentComplete;
+        findViewById(R.id.detail_start_path).setLayoutParams(timeStarted);
+        LinearLayout.LayoutParams timeEnd = (LinearLayout.LayoutParams)findViewById(R.id.detail_end_path).getLayoutParams();
+        timeEnd.weight = 1 - percentComplete;
+        findViewById(R.id.detail_end_path).setLayoutParams(timeEnd);
+
         if (p.getCommittees().length == 0)  {
             committees.setText("None");
         } else {
-            String committeeList = p.getCommittees()[0].getName();
-            for (int i = 1; i < p.getCommittees().length; i++)  {
-                committeeList += ", " + p.getCommittees()[i].getName();
+            ArrayList<String> committeeList = new ArrayList<String>();
+            ArrayList<String> subCommitteeList = new ArrayList<String>();
+            Committee[] c = p.getCommittees();
+            for (int i = 0; i < c.length; i++)  {
+                if (c[i].getIfCommittee())  {
+                    committeeList.add(c[i].getName());
+                } else  {
+                    subCommitteeList.add(c[i].getName());
+                }
             }
-            committees.setText(committeeList);
+            String finalCommittees = "";
+            if (committeeList.size() > 0)   {
+                finalCommittees += committeeList.get(0);
+                for (int i = 1; i < committeeList.size(); i++)  {
+                    finalCommittees += ", " + committeeList.get(i);
+                }
+            }
+            committees.setText(finalCommittees);
         }
         billContainer.removeAllViews();
         for (int i = 0; i < billAdapter.getCount(); i++)    {

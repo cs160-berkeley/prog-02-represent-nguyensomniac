@@ -4,7 +4,7 @@ Briefly describe your app here.
 
 ## Authors
 
-FirstName LastName ([your_email@berkeley.edu](mailto:your_email@berkeley.edu))
+Lily Nguyen ([lcn@berkeley.edu](mailto:lcn@berkeley.edu))
 
 ## Demo Video
 
@@ -12,9 +12,11 @@ See [your demo video title here] (https://link_to_your_video)
 
 ## Screenshots
 
-<img src="screenshots/main.png" height="400" alt="Screenshot"/>
+<img src="http://i.imgur.com/aPX9PYI.png" height="400" alt="Screenshot"/>
+<img src="http://i.imgur.com/YR0Nqvk.png" height="400" alt="Screenshot"/>
+<img src="http://i.imgur.com/e5nMWRV.png" height="400" alt="Screenshot"/>
+<img src="http://i.imgur.com/89twiF9.png" height="400" alt="Screenshot"/>
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
-* Any other support
+* all the emotional support

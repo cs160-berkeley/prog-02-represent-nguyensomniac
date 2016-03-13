@@ -1,7 +1,5 @@
 # PROG 02: Represent!
 
-Briefly describe your app here.
-
 ## Authors
 
 Lily Nguyen ([lcn@berkeley.edu](mailto:lcn@berkeley.edu))
